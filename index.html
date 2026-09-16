@@ -52,15 +52,12 @@
   .marque {
     width: 58px; height: 58px;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, var(--terracotta-vif), var(--brique) 75%);
-    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
     border: 2px solid var(--safran);
   }
-  .marque span {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--creme);
+  .marque img {
+    width: 100%; height: 100%;
+    object-fit: cover;
   }
   .tel-pill {
     display: inline-flex;
@@ -397,7 +394,7 @@
 <div class="grain"></div>
 
 <header class="topbar">
-  <div class="marque"><span>M</span></div>
+  <div class="marque"><img src="assets/logo.png" alt="La Cuisine de Mouima"></div>
   <a href="tel:0617110282" class="tel-pill">06 17 11 02 82</a>
 </header>
 <nav class="souk-links">
