@@ -1,0 +1,548 @@
+<title>Mouima — Souk</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cacao: #2a160d;
+    --cacao-mid: #3d2013;
+    --cacao-card: #472819;
+    --terracotta: #c65a30;
+    --terracotta-vif: #de6b3b;
+    --safran: #e3a63e;
+    --brique: #8f3420;
+    --creme: #f7ead6;
+    --creme-mate: #e9d3ae;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Work Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; background: var(--cacao); }
+
+  body {
+    background: var(--cacao);
+    color: var(--creme);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  .grain {
+    position: fixed; inset: 0; z-index: 200; pointer-events: none;
+    opacity: .07; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ===== TOPBAR ===== */
+  .topbar {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.6rem 6vw 0;
+  }
+  .marque {
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--terracotta-vif), var(--brique) 75%);
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--safran);
+  }
+  .marque span {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--creme);
+  }
+  .tel-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.4rem;
+    border: 1px solid rgba(247,234,214,.35);
+    border-radius: 999px;
+    font-size: .92rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    transition: border-color .2s, background .2s;
+  }
+  .tel-pill:hover { border-color: var(--safran); background: rgba(227,166,62,.1); }
+
+  .souk-links {
+    display: flex;
+    justify-content: center;
+    gap: 2.2rem;
+    padding: 1.1rem 6vw 0;
+    flex-wrap: wrap;
+  }
+  .souk-links a {
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--creme-mate);
+    opacity: .75;
+    transition: opacity .2s, color .2s;
+  }
+  .souk-links a:hover { opacity: 1; color: var(--safran); }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 3.5rem 6vw 5rem;
+    overflow: hidden;
+  }
+
+  .sunburst {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    width: 640px;
+    max-width: none;
+    transform: translateX(-50%);
+    opacity: .55;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .photo-wrap {
+    position: relative;
+    width: min(320px, 62vw);
+    margin: 0 auto 2.4rem;
+  }
+  .photo-ring {
+    position: absolute;
+    inset: -18px;
+    border: 1.5px dashed rgba(247,234,214,.38);
+    border-radius: 50%;
+    animation: tourne 40s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) { .photo-ring { animation: none; } }
+  @keyframes tourne { to { transform: rotate(360deg); } }
+  .photo-disque {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 30px 70px rgba(0,0,0,.55);
+    border: 3px solid var(--cacao);
+  }
+  .photo-disque img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 42%;
+  }
+
+  .hero-kicker {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+    color: var(--safran);
+    position: relative; z-index: 1;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 7vw, 4.6rem);
+    line-height: 1.05;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin-top: .5rem;
+    color: var(--creme);
+    position: relative; z-index: 1;
+  }
+
+  .hero-sub {
+    max-width: 50ch;
+    margin: 1.3rem auto 0;
+    color: var(--creme-mate);
+    font-size: 1.02rem;
+    position: relative; z-index: 1;
+  }
+
+  .tampons {
+    display: flex;
+    justify-content: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+    margin-top: 2.6rem;
+    position: relative; z-index: 1;
+  }
+  .tampon {
+    width: 74px; height: 74px;
+    border-radius: 50%;
+    border: 2px solid var(--safran);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transform: rotate(-6deg);
+    background: rgba(247,234,214,.04);
+  }
+  .tampon:nth-child(2) { transform: rotate(3deg); }
+  .tampon:nth-child(3) { transform: rotate(-3deg); }
+  .tampon b { font-family: var(--font-display); font-size: 1.3rem; color: var(--safran); }
+  .tampon span { font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--creme-mate); }
+
+  .hero-cta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2.6rem;
+    position: relative; z-index: 1;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .95rem 2.1rem;
+    font-family: var(--font-body);
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    border-radius: 999px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-plein {
+    background: linear-gradient(135deg, var(--terracotta-vif), var(--brique));
+    color: var(--creme);
+    box-shadow: 0 12px 30px rgba(198,90,48,.35);
+  }
+  .btn-plein:hover { transform: translateY(-3px); }
+  .btn-ligne {
+    border: 1.5px solid rgba(247,234,214,.4);
+    color: var(--creme);
+  }
+  .btn-ligne:hover { border-color: var(--safran); color: var(--safran); }
+
+  /* ===== SECTIONS ===== */
+  .section { padding: 5rem 6vw; max-width: 1020px; margin: 0 auto; position: relative; }
+
+  .eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--safran);
+    margin-bottom: .5rem;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 4.4vw, 3rem);
+    line-height: 1.1;
+    color: var(--creme);
+    text-wrap: balance;
+  }
+
+  .intro-texte { text-align: center; }
+  .intro-texte p {
+    max-width: 58ch;
+    margin: 1.3rem auto 0;
+    color: var(--creme-mate);
+    font-size: 1.05rem;
+  }
+  .signature {
+    margin-top: 1.6rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--safran);
+  }
+
+  /* ===== CARTE — fiches recette ===== */
+  .carte-bg { text-align: center; }
+  .carte-bg .intro { max-width: 54ch; margin: 1rem auto 2.6rem; color: var(--creme-mate); }
+
+  .fiches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.8rem;
+    text-align: left;
+  }
+  .fiche {
+    background: var(--cacao-card);
+    border: 1px solid rgba(227,166,62,.25);
+    border-radius: 14px;
+    padding: 1.8rem 1.6rem;
+    transform: rotate(-1deg);
+    box-shadow: 0 14px 34px rgba(0,0,0,.35);
+  }
+  .fiche:nth-child(2n) { transform: rotate(1deg); }
+  .fiche:nth-child(3n) { transform: rotate(-.5deg); }
+  .fiche-titre {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--safran);
+    padding-bottom: .5rem;
+    border-bottom: 1px dashed rgba(247,234,214,.25);
+    margin-bottom: .8rem;
+  }
+  .fiche-note {
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--terracotta-vif);
+    white-space: nowrap;
+  }
+  .fiche-ligne {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+    padding: .48rem 0;
+  }
+  .fiche-nom { font-size: .9rem; color: var(--creme); }
+  .fiche-nom small { display: block; font-size: .74rem; color: var(--creme-mate); opacity: .7; margin-top: .1rem; }
+  .fiche-leader { flex: 1; border-bottom: 1px dotted rgba(247,234,214,.25); transform: translateY(-4px); min-width: 10px; }
+  .fiche-prix { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--safran); font-size: .9rem; white-space: nowrap; }
+  .fiche-sup { margin-top: .6rem; font-size: .75rem; font-style: italic; color: var(--creme-mate); opacity: .75; }
+
+  .carte-note { margin-top: 2.6rem; font-size: .88rem; color: var(--creme-mate); }
+  .carte-note a { color: var(--safran); border-bottom: 1px solid rgba(227,166,62,.4); }
+
+  /* ===== ZONE ===== */
+  .zone-bg { text-align: center; }
+  .zone-liste {
+    display: flex;
+    justify-content: center;
+    gap: 2.4rem;
+    flex-wrap: wrap;
+    margin-top: 2.6rem;
+  }
+  .dept-stamp {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 2px solid var(--safran);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(circle at 35% 30%, rgba(227,166,62,.12), transparent 70%);
+  }
+  .dept-stamp .chiffre { font-family: var(--font-display); font-weight: 700; font-size: 2.1rem; color: var(--safran); }
+  .dept-stamp .nom { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--creme-mate); margin-top: .2rem; }
+
+  /* ===== OCCASIONS ===== */
+  .occasions-liste {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 2rem;
+    margin-top: 2.6rem;
+  }
+  .occasion {
+    border-left: 3px solid var(--terracotta-vif);
+    padding-left: 1.2rem;
+  }
+  .occasion h3 { font-family: var(--font-display); font-size: 1.15rem; color: var(--creme); }
+  .occasion p { margin-top: .4rem; font-size: .9rem; color: var(--creme-mate); }
+
+  /* ===== CONTACT ===== */
+  .contact-bg {
+    text-align: center;
+    background: radial-gradient(ellipse 70% 60% at 50% 0%, var(--cacao-mid), var(--cacao) 65%);
+  }
+  .contact-bg > p { max-width: 46ch; margin: 1.1rem auto 0; color: var(--creme-mate); }
+  .contact-liens {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2.6rem;
+  }
+  .contact-lien {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: 1rem 1.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(227,166,62,.35);
+    font-size: .9rem;
+    font-weight: 600;
+    transition: border-color .2s, background .2s;
+  }
+  .contact-lien:hover { border-color: var(--safran); background: rgba(227,166,62,.08); }
+
+  footer {
+    text-align: center;
+    padding: 2.6rem 1.5rem;
+    font-size: .8rem;
+    color: var(--creme-mate);
+    opacity: .7;
+    border-top: 1px solid rgba(247,234,214,.1);
+  }
+  footer strong { font-family: var(--font-display); font-style: italic; color: var(--safran); }
+
+  @media (max-width: 600px) {
+    .section { padding: 3.6rem 6vw; }
+    .tampons { gap: .9rem; }
+    .tampon { width: 64px; height: 64px; }
+  }
+</style>
+
+<div class="grain"></div>
+
+<header class="topbar">
+  <div class="marque"><span>M</span></div>
+  <a href="tel:0617110282" class="tel-pill">06 17 11 02 82</a>
+</header>
+<nav class="souk-links">
+  <a href="#">Accueil</a>
+  <a href="#carte">La carte</a>
+  <a href="#zone">Zone</a>
+  <a href="#occasions">Occasions</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero">
+  <svg class="sunburst" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#e3a63e" stroke-width="1.2" opacity=".3">
+      <circle cx="320" cy="320" r="300" fill="none"/>
+      <circle cx="320" cy="320" r="230" fill="none"/>
+    </g>
+    <g stroke="#de6b3b" stroke-width="1.4" opacity=".35">
+      <line x1="320" y1="10" x2="320" y2="630"/>
+      <line x1="10" y1="320" x2="630" y2="320"/>
+      <line x1="85" y1="85" x2="555" y2="555"/>
+      <line x1="555" y1="85" x2="85" y2="555"/>
+      <line x1="320" y1="60" x2="320" y2="580" transform="rotate(30 320 320)"/>
+      <line x1="320" y1="60" x2="320" y2="580" transform="rotate(60 320 320)"/>
+      <line x1="320" y1="60" x2="320" y2="580" transform="rotate(120 320 320)"/>
+      <line x1="320" y1="60" x2="320" y2="580" transform="rotate(150 320 320)"/>
+    </g>
+  </svg>
+
+  <p class="hero-kicker">Comme à la maison</p>
+  <h1>La cuisine marocaine,<br>servie chez vous.</h1>
+
+  <div class="photo-wrap">
+    <div class="photo-ring"></div>
+    <div class="photo-disque">
+      <img src="assets/tajine.webp" alt="Tajine marocain traditionnel, mijoté aux fruits secs et amandes">
+    </div>
+  </div>
+
+  <p class="hero-sub">Tajines mijotés, pastillas dorées, couscous parfumés — Mouima cuisine directement chez vous, entre Savoie, Haute-Savoie et Isère.</p>
+
+  <div class="tampons">
+    <div class="tampon"><b>73</b><span>Savoie</span></div>
+    <div class="tampon"><b>74</b><span>Ht-Savoie</span></div>
+    <div class="tampon"><b>38</b><span>Isère</span></div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="tel:0617110282" class="btn btn-plein">Appeler Mouima</a>
+    <a href="https://instagram.com/lacuisinedemouima" target="_blank" class="btn btn-ligne">Instagram</a>
+  </div>
+</section>
+
+<section class="section intro-texte">
+  <p class="eyebrow">Notre histoire</p>
+  <h2>Une cuisine transmise, pas improvisée</h2>
+  <p>Mouima cuisine comme on lui a appris : à l'œil, au temps long, avec les épices qu'il faut et pas une de plus. Chaque tajine mijote des heures, chaque pastilla se plie à la main.</p>
+  <p class="signature">« On ne sert pas un plat, on partage un repas. »</p>
+</section>
+
+<section class="section carte-bg" id="carte">
+  <p class="eyebrow">La carte</p>
+  <h2>Ce que Mouima cuisine pour vous</h2>
+  <p class="intro">Préparé à la commande, en quantité adaptée à votre réception. Tarifs indicatifs, hors livraison.</p>
+
+  <div class="fiches">
+    <div class="fiche">
+      <div class="fiche-titre">Entrées &amp; buffet <span class="fiche-note">min. 10 pièces</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Bricks<small>Poulet-légumes ou viande-pomme de terre</small></span><span class="fiche-leader"></span><span class="fiche-prix">2,50 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Batbout<small>Petits pains garnis</small></span><span class="fiche-leader"></span><span class="fiche-prix">2 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Mini msemmen nature</span><span class="fiche-leader"></span><span class="fiche-prix">2 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Mini msemmen farci</span><span class="fiche-leader"></span><span class="fiche-prix">3 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Mini pizza thon</span><span class="fiche-leader"></span><span class="fiche-prix">2 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Baghrir<small>Crêpe mille trous</small></span><span class="fiche-leader"></span><span class="fiche-prix">1,50 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Mini pastilla poulet</span><span class="fiche-leader"></span><span class="fiche-prix">6 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Mini pastilla fruits de mer</span><span class="fiche-leader"></span><span class="fiche-prix">8 €</span></div>
+    </div>
+
+    <div class="fiche">
+      <div class="fiche-titre">Couscous <span class="fiche-note">min. 5 portions</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Bœuf<small>la part</small></span><span class="fiche-leader"></span><span class="fiche-prix">18 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Poulet<small>la part</small></span><span class="fiche-leader"></span><span class="fiche-prix">14 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Agneau<small>la part</small></span><span class="fiche-leader"></span><span class="fiche-prix">16 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Royal<small>Poulet, bœuf, merguez</small></span><span class="fiche-leader"></span><span class="fiche-prix">20 €</span></div>
+      <p class="fiche-sup">Suppl. oignons caramélisés &amp; raisins secs : 2 € / portion</p>
+    </div>
+
+    <div class="fiche">
+      <div class="fiche-titre">Tajines <span class="fiche-note">min. 5 pers.</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Bœuf<small>Sucré ou salé — la part</small></span><span class="fiche-leader"></span><span class="fiche-prix">16 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Boulettes<small>Viande hachée, œuf</small></span><span class="fiche-leader"></span><span class="fiche-prix">13 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Agneau<small>Sucré ou salé — la part</small></span><span class="fiche-leader"></span><span class="fiche-prix">18 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Cuisses de poulet<small>Olives &amp; citrons confits</small></span><span class="fiche-leader"></span><span class="fiche-prix">6 €</span></div>
+    </div>
+
+    <div class="fiche">
+      <div class="fiche-titre">Desserts — Tiramisu <span class="fiche-note">min. 10 / saveur</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Choco &amp; noisette</span><span class="fiche-leader"></span><span class="fiche-prix">3 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Pistache</span><span class="fiche-leader"></span><span class="fiche-prix">3 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Caramel &amp; spéculoos</span><span class="fiche-leader"></span><span class="fiche-prix">3 €</span></div>
+      <div class="fiche-ligne"><span class="fiche-nom">Citron</span><span class="fiche-leader"></span><span class="fiche-prix">3 €</span></div>
+    </div>
+
+    <div class="fiche">
+      <div class="fiche-titre">Snacks</div>
+      <div class="fiche-ligne"><span class="fiche-nom">Energy balls<small>Sachet de 150 g</small></span><span class="fiche-leader"></span><span class="fiche-prix">8 €</span></div>
+    </div>
+  </div>
+
+  <p class="carte-note">Menus sur mesure et grandes quantités — <a href="mailto:lacuisinedemouima@gmail.com">écrire à Mouima</a>.</p>
+</section>
+
+<section class="section zone-bg" id="zone">
+  <p class="eyebrow">Zone d'intervention</p>
+  <h2>Elle cuisine, vous recevez</h2>
+  <p style="margin-top:1rem;max-width:56ch;margin-left:auto;margin-right:auto;color:var(--creme-mate);">Mouima prépare vos plats et vous les apporte, entre Savoie, Haute-Savoie et Isère.</p>
+  <div class="zone-liste">
+    <div class="dept-stamp"><div class="chiffre">73</div><div class="nom">Savoie</div></div>
+    <div class="dept-stamp"><div class="chiffre">74</div><div class="nom">Haute-Savoie</div></div>
+    <div class="dept-stamp"><div class="chiffre">38</div><div class="nom">Isère</div></div>
+  </div>
+</section>
+
+<section class="section" id="occasions">
+  <p class="eyebrow">Pour quelles occasions</p>
+  <h2>Un menu pour chaque réception</h2>
+  <div class="occasions-liste">
+    <div class="occasion"><h3>Anniversaires &amp; fêtes de famille</h3><p>Un buffet généreux, pensé pour être partagé.</p></div>
+    <div class="occasion"><h3>Mariages &amp; fiançailles</h3><p>Pastillas et tajines en grande quantité.</p></div>
+    <div class="occasion"><h3>Réceptions d'entreprise</h3><p>Un buffet oriental soigné pour surprendre.</p></div>
+    <div class="occasion"><h3>Repas entre amis</h3><p>Un tajine pour quatre ou pour douze.</p></div>
+  </div>
+</section>
+
+<section class="section contact-bg" id="contact">
+  <p class="eyebrow">Réservation</p>
+  <h2>Parlons de votre événement</h2>
+  <p>Précisez la date, le nombre de convives et vos envies — Mouima vous propose un menu sur mesure.</p>
+  <div class="contact-liens">
+    <a href="tel:0617110282" class="contact-lien">☎ 06 17 11 02 82</a>
+    <a href="https://instagram.com/lacuisinedemouima" target="_blank" class="contact-lien">◎ @lacuisinedemouima</a>
+    <a href="mailto:lacuisinedemouima@gmail.com" class="contact-lien">✉ lacuisinedemouima@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <p><strong>La Cuisine de Mouima</strong> — Traiteur marocain à domicile</p>
+  <p style="margin-top:.4rem;">Savoie · Haute-Savoie · Isère</p>
+</footer>
