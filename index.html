@@ -50,14 +50,12 @@
     padding: 1.6rem 6vw 0;
   }
   .marque {
-    width: 58px; height: 58px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid var(--safran);
-  }
-  .marque img {
-    width: 100%; height: 100%;
-    object-fit: cover;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--creme);
   }
   .tel-pill {
     display: inline-flex;
@@ -97,6 +95,33 @@
     text-align: center;
     padding: 3.5rem 6vw 5rem;
     overflow: hidden;
+  }
+
+  .logo-medaillon {
+    width: min(180px, 42vw);
+    aspect-ratio: 1;
+    margin: 0 auto 1.8rem;
+    border-radius: 50%;
+    padding: 7px;
+    background: conic-gradient(from 0deg, var(--safran), var(--terracotta-vif), var(--brique), var(--safran));
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 25px 60px rgba(0,0,0,.55);
+  }
+  .logo-medaillon::before {
+    content: '';
+    position: absolute;
+    inset: -11px;
+    border: 1.5px dashed rgba(247,234,214,.3);
+    border-radius: 50%;
+  }
+  .logo-medaillon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--cacao);
+    display: block;
   }
 
   .sunburst {
@@ -394,7 +419,7 @@
 <div class="grain"></div>
 
 <header class="topbar">
-  <div class="marque"><img src="assets/logo.png" alt="La Cuisine de Mouima"></div>
+  <div class="marque">Mouima</div>
   <a href="tel:0617110282" class="tel-pill">06 17 11 02 82</a>
 </header>
 <nav class="souk-links">
@@ -423,6 +448,7 @@
     </g>
   </svg>
 
+  <div class="logo-medaillon"><img src="assets/logo.png" alt="La Cuisine de Mouima"></div>
   <p class="hero-kicker">Comme à la maison</p>
   <h1>La cuisine marocaine,<br>servie chez vous.</h1>
 
